@@ -15,6 +15,7 @@ CREATE TABLE files (
   created_offset_epoch_seconds INTEGER,
   pathfile TEXT,
   md5_checksum TEXT,
+  notes TEXT,
   FOREIGN KEY( scheduled_samples_id ) REFERENCES scheduled_samples( id )
 );
 
