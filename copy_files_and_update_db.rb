@@ -7,9 +7,9 @@
 #  - copy file to MM/DD/MMDDHH.ext off of some preconfigured base directory
 #  - add records to files table
 
-src_base_dir = '/home/js/work'
-target_base_dir = '/home/js/tmp/vs_test'
-db_name = 'testing.db'
+src_base_dir = '/media/usb0/'
+target_base_dir = '/home/js/tmp/vs_files'
+db_name = 'vs_db.sqlite3'
 
 require 'fileutils'
 require 'sqlite3'
@@ -32,7 +32,7 @@ def prepare_db_data( f, cl, tbd, df )
   m = /(\.\w+)$/.match( f )
   if m && m[1]
     # yes it's redundant, but this way, if the file is outside of it's directory i have half a chance of knowing what it is
-    new_pathfile = s.mtime.strftime( "%m/%d/%m%d%H" ) + m[1]
+    new_pathfile = s.mtime.strftime( "%m/%d/%m%d%H%M" ) + m[1]
   else  
     puts "couldn't find file extension for #{f}\n"
     next
@@ -82,9 +82,9 @@ dirs.each do |d|
     end
 
     # change to m4a before going live
-    if /\.txt$/.match( e )
+    if /\.m4a$/.match( e )
       snd.push( pathfile )
-    elsif /\.jpg$/.match( e )
+    elsif /\.JPG$/.match( e )
       img.push( pathfile )
     end
 
